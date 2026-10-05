@@ -1,5 +1,28 @@
 import { test, expect } from "@playwright/test";
 
+let authToken: string
+
+test.beforeAll('Run Before All', async ( {request} ) => {
+  
+console.log('This is executed before all tests')
+ const tokenResponse = await request.post(
+    "https://conduit-api.bondaracademy.com/api/users/login",
+    {
+      data: {
+        user: {
+          email: "jpqa@test.com",
+          password: "Piano123"
+        }
+      }
+    }
+  );
+
+  const tokenResponseJSON = await tokenResponse.json();
+  authToken = 'Token ' + tokenResponseJSON.user.token;
+
+})
+
+
 test("GET Test Tags", async ({ request }) => {
   const tagsResponse = await request.get(
     "https://conduit-api.bondaracademy.com/api/tags",
@@ -23,21 +46,7 @@ test("GET All Articles", async ({ request }) => {
 });
 
 test("Create Article and Delete Article", async ({ request }) => {
-  const tokenResponse = await request.post(
-    "https://conduit-api.bondaracademy.com/api/users/login",
-    {
-      data: {
-        user: {
-          email: "jpqa@test.com",
-          password: "Piano123"
-        }
-      }
-    }
-  );
-
-  const tokenResponseJSON = await tokenResponse.json();
-  const authToken = 'Token ' + tokenResponseJSON.user.token;
-
+ 
   const newArticleResponse = await request.post(
     "https://conduit-api.bondaracademy.com/api/articles/",
     {
@@ -83,20 +92,6 @@ test("Create Article and Delete Article", async ({ request }) => {
 });
 
 test("Create, Update and Delete Article", async ({ request }) => {
-  const tokenResponse = await request.post(
-    "https://conduit-api.bondaracademy.com/api/users/login",
-    {
-      data: {
-        user: {
-          email: "jpqa@test.com",
-          password: "Piano123"
-        }
-      }
-    }
-  );
-
-  const tokenResponseJSON = await tokenResponse.json();
-  const authToken = 'Token ' + tokenResponseJSON.user.token;
 
   const newArticleResponse = await request.post(
     "https://conduit-api.bondaracademy.com/api/articles/",
