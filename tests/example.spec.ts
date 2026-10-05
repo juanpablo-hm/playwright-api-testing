@@ -45,7 +45,7 @@ test("GET All Articles", async ({ request }) => {
   expect(articlesResponseJSON.articlesCount).toEqual(10);
 });
 
-test("Create Article and Delete Article", async ({ request }) => {
+test("Create and Delete Article", async ({ request }) => {
  
   const newArticleResponse = await request.post(
     "https://conduit-api.bondaracademy.com/api/articles/",
