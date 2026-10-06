@@ -1,9 +1,7 @@
-import {test, expect} from '@playwright/test'
-import { RequestHandler } from '../utils/request-handler'
+import { test } from '../utils/fixtures'
 
-test('First test', async ({}) => {
 
-    const api = new RequestHandler()
+test('First test', async ({api}) => {
 
     api
         .url('https://conduit-api.bondaracademy.com/api')
@@ -11,4 +9,5 @@ test('First test', async ({}) => {
         .params({limit:10, offset:0})
         .headers({Authorization: 'authToken'})
         .body({"user": {"email": "jpqa@test.com", "password": "Piano123"}})
+ 
 })
