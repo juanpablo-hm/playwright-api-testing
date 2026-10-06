@@ -34,7 +34,7 @@ test("GET Test Tags", async ({ request }) => {
   expect(tagsResponseJSON.tags.length).toBeLessThanOrEqual(10);
 });
 
-test("GET All Articles", async ({ request }) => {
+test("GET all Articles", async ({ request }) => {
   const articlesResponse = await request.get(
     "https://conduit-api.bondaracademy.com/api/articles?limit=10&offset=0",
   );

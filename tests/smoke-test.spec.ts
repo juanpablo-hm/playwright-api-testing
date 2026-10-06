@@ -1,13 +1,28 @@
 import { test } from '../utils/fixtures'
+import { expect } from '@playwright/test'
 
 
-test('First test', async ({api}) => {
+test('GET all Articles', async ({api}) => {
 
-    api
-        //.url('https://random-url.com/api')
-        .path('/articles')
-        .params({limit:10, offset:0})
-        .headers({Authorization: 'authToken'})
-        .body({"user": {"email": "jpqa@test.com", "password": "Piano123"}})
+    const response = await api
+          .path('/articles')
+          .params({limit:10, offset:0})
+          .getRequest(200)
+
+    expect(response.articles.length).toBeLessThanOrEqual(10);
+    expect(response.articlesCount).toEqual(10);
+    
+})
+
+test('GET Test Tags', async ({api}) => {
+
+    const reponse = await api
+          .path('/tags')
+          .getRequest(200)
+    
+   
+   expect(reponse.tags[0]).toEqual("Test");
+   expect(reponse.tags.length).toBeLessThanOrEqual(10);      
+
 
 })
