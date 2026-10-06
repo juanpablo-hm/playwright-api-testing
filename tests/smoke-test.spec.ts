@@ -9,6 +9,5 @@ test('First test', async ({api}) => {
         .params({limit:10, offset:0})
         .headers({Authorization: 'authToken'})
         .body({"user": {"email": "jpqa@test.com", "password": "Piano123"}})
-        .getUrl()
- 
+
 })
